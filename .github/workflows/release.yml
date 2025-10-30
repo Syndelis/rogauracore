@@ -1,0 +1,41 @@
+on:
+  release:
+    types:
+      - published
+
+env:
+  CACHE_ON_FAILURE: true
+
+jobs:
+  build:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install compile-time dependencies
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libusb-1.0-0-dev
+
+      - name: Compile rogauracore
+        shell: bash
+        run: |
+          autoreconf -i 
+          ./configure --prefix=/usr
+          mkdir -p rogauracore_amd64/usr
+          make DESTDIR="rogauracore_amd64/" udevrulesdir="/usr/lib/udev/rules.d" install
+
+      - name: Bundle package
+        shell: bash
+        run: tar czvf rogauracore_amd64.tar.gz rogauracore_amd64/
+
+      - name: Attach to Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload ${{ github.event.release.tag_name }} rogauracore_amd64.tar.gz
+
