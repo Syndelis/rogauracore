@@ -1,3 +1,11 @@
+> [!NOTE]
+> This is a fork with the following PRs merged:
+> - wroberts/rogauracore#26
+> - wroberts/rogauracore#80
+> - wroberts/rogauracore#100
+> 
+> Additionally, this fork provides pre-built binaries in the [releases](https://github.com/Syndelis/rogauracore/releases)
+
 # rogauracore - RGB keyboard control for Asus ROG laptops
 
 (c) 2019 Will Roberts
