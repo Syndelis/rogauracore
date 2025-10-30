@@ -41,9 +41,10 @@ with the laptop's keyboard.  This is easy to do with `sudo`.  Try some
 of these commands and see what works for you:
 
 ```sh
-sudo rogauracore single_static 0000ff
-sudo rogauracore single_static 00ff00
-sudo rogauracore single_static ffff00
+sudo rogauracore white
+sudo rogauracore brightness low
+sudo rogauracore rainbow
+sudo rogauracore single_breathing red blue
 sudo rogauracore multi_static ff0000 ffff00 00ff00 00ffff
 sudo rogauracore single_colorcycle 1
 ```
@@ -76,20 +77,18 @@ sudo apt install build-essential
 
 Retrieve the `rogauracore` package, either through `curl` or `git`:
 ```sh
-VERSION=1.6
-curl -LOs https://github.com/wroberts/rogauracore/releases/download/$VERSION/rogauracore-$VERSION.tar.gz
-tar xf rogauracore-$VERSION.tar.gz
-cd rogauracore-$VERSION/
-```
-or
-```sh
-git clone https://github.com/wroberts/rogauracore.git
-cd rogauracore
-autoreconf -i
+VERSION=1.6.1
+curl -LOs https://github.com/Syndelis/rogauracore/releases/download/$VERSION/rogauracore_amd64.tar.gz
+tar xzvf rogauracore_amd64.tar.gz
+cd rogauracore_amd64/
+# Manually move the binary and the udev rules to the correct places
 ```
 
-Then configure, make and install:
+or
 ```sh
+git clone https://github.com/Syndelis/rogauracore.git
+cd rogauracore
+autoreconf -i
 ./configure
 make
 sudo make install
@@ -115,4 +114,4 @@ sudo systemctl restart upower.service
   [@rastafaninplakeibol](https://github.com/rastafaninplakeibol).
 
 - [OpenRGB](https://gitlab.com/CalcProgrammer1/OpenRGB) can probably
-  do all the things that `rogauracore` can do.
+  do all the things that `rogauracore` can do, except it may not support all devices this project does.
