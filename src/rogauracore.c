@@ -781,7 +781,14 @@ freelist:
 deinit:
     libusb_exit(0);
 exit:
-    return nRetval;
+    // libusb errors are always negative values, but success values can be
+    // positive. Avoid returning positive non-zero error codes so that they
+    // aren't interpreted as errors by the shell
+    if (nRetval < 0) {
+        return nRetval;
+    } else {
+        return 0;
+    }
 }
 
 // ------------------------------------------------------------
