@@ -361,7 +361,7 @@ printFuncUsage(const FunctionRecord *func) {
     printf("\n");
 }
 
-inline void
+void
 printColumns(int nItems, const void *items, int itemSize, int nColumns) {
     const int nRows = (nItems + nColumns - 1) / nColumns;
     for (int i = 0; i < nRows; ++i) {
